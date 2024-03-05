@@ -48,6 +48,7 @@ export default function Recipes() {
                 image: item.image,
                 minutes: item.minutes,
               }}
+              onPress={() => router.navigate(`/recipe/${item.id}`)}
             />
           )
         }}
