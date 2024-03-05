@@ -16,8 +16,7 @@ export default function Ingredient({ name, image, selected, ...rest }: Ingredien
             >
             <Image
                 style={styles.image}
-                // source={require(image)} 
-                source={require("../../assets/images/apple.png")} 
+                source={{ uri: image}} 
                 />
             <Text
                 style={styles.title}

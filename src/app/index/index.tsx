@@ -2,7 +2,6 @@ import { View, Text } from "react-native";
 
 import { styles } from "./styles";
 import Ingredients from "@//components/ingredients";
-import { Selected } from "@//components/selected";
 
 export default function Index() {
     return (

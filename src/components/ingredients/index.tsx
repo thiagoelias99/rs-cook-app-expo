@@ -2,11 +2,14 @@ import { Alert, ScrollView } from "react-native"
 
 import { styles } from "./styles"
 import Ingredient from "../ingredient"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Selected } from "../selected"
+import { router } from "expo-router"
+import { services } from "@//services"
 
 export default function Ingredients() {
     const [selected, setSelected] = useState<string[]>([])
+    const [ingredients, setIngredients] = useState<IngredientsResponse[]>([])
 
     function handleSelect(name: string) {
         if (selected.includes(name)) {
@@ -14,6 +17,11 @@ export default function Ingredients() {
         } else {
             setSelected([...selected, name])
         }
+    }
+
+    function handleSearch() {
+        // router.navigate("/recipes/" + selected)
+        router.navigate("/recipes/")
     }
 
     function handleClear() {
@@ -29,19 +37,23 @@ export default function Ingredients() {
         ])
     }
 
+    useEffect(() => {
+        services.ingredients.findAll().then(setIngredients)
+    }, [])
+
     return (
         <>
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.container}
             >
-                {Array.from({ length: 100 }).map((_, index) => (
+                {ingredients.map((ingredient) => (
                     <Ingredient
-                        selected={selected.includes(index.toString())}
-                        key={index}
-                        name="Apple"
-                        image="../../assets/images/apple.png"
-                        onPress={() => handleSelect(index.toString())}
+                        selected={selected.includes(ingredient.id)}
+                        key={ingredient.id}
+                        name={ingredient.name}
+                        image={`${services.storage.imagePath}${ingredient.image}`}
+                        onPress={() => handleSelect(ingredient.id)}
                     />
                 ))}
             </ScrollView>
@@ -49,7 +61,7 @@ export default function Ingredients() {
                 <Selected
                     quantity={selected.length}
                     onClear={handleClear}
-                    onSearch={() => { }}
+                    onSearch={handleSearch}
                 />
             )}
         </>

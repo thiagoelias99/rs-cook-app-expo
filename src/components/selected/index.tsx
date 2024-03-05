@@ -5,7 +5,7 @@ import Animated, { BounceOutDown, SlideInDown } from "react-native-reanimated"
 import { theme } from "@//theme"
 import { styles } from "./styles"
 
-// import { Button } from "@//components/Button"
+import { Button } from "@//components/button"
 
 type Props = {
   quantity: number
@@ -31,7 +31,7 @@ export function Selected({ quantity, onClear, onSearch }: Props) {
         />
       </View>
 
-      {/* <Button title="Encontrar" onPress={onSearch} /> */}
+      <Button title="Encontrar" onPress={onSearch} />
     </Animated.View>
   )
 }
