@@ -20,8 +20,7 @@ export default function Ingredients() {
     }
 
     function handleSearch() {
-        // router.navigate("/recipes/" + selected)
-        router.navigate("/recipes/")
+        router.navigate("/recipes/" + selected)
     }
 
     function handleClear() {
